@@ -1,0 +1,41 @@
+---
+title: "Presidental Election Voting Trends"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(scales)
+```
+```{r}
+voters <- read_csv("./usvoterturnout.csv")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### US Voter Turnouts
+
+```{r}
+voters |> ggplot() + geom_line(aes(x=year,y=voter_ratio,col='Total  Votes'))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Total Eligible Voters
+
+```{r}
+voters |> ggplot() + geom_line(aes(x=year,y=eligible_voters,col='Total  Votes'))
+```
+
+### Total Votes Cast
+
+```{r}
+voters |> ggplot() + geom_line(aes(x=year,y=total_votes,col='Total  Votes'))
+```
+
